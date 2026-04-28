@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: stock-ai-agent
+Version: 0.1.0
+Summary: AI-powered stock analysis tool
+Requires-Python: >=3.10
+Requires-Dist: openai
+Requires-Dist: akshare>=1.14.0
+Requires-Dist: pandas
+Requires-Dist: python-dotenv
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: behave; extra == "dev"
+Requires-Dist: pytest-mock; extra == "dev"

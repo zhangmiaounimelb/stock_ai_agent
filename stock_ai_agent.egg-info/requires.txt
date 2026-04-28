@@ -1,0 +1,9 @@
+openai
+akshare>=1.14.0
+pandas
+python-dotenv
+
+[dev]
+pytest
+behave
+pytest-mock

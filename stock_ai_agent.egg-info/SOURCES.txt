@@ -1,0 +1,6 @@
+pyproject.toml
+stock_ai_agent.egg-info/PKG-INFO
+stock_ai_agent.egg-info/SOURCES.txt
+stock_ai_agent.egg-info/dependency_links.txt
+stock_ai_agent.egg-info/requires.txt
+stock_ai_agent.egg-info/top_level.txt
