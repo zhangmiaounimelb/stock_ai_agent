@@ -8,6 +8,7 @@ dependencies = [
     "akshare>=1.14.0",
     "pandas",
     "python-dotenv",
+    "jinja2"   # 
 ]
 
 [project.optional-dependencies]
