@@ -12,7 +12,7 @@ def deepseek(prompt: str) -> str:
         headers= {"Authorization": f"Bearer {api}",
                  "Content-Type": "application/json"},
         json={
-            "model": "deepseek-3.5",
+            "model": "deepseek-chat",
             "messages": [{"role": "user", "content": prompt}]
             }
     )    
