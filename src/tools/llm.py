@@ -14,7 +14,8 @@ def deepseek(prompt: str) -> str:
         json={
             "model": "deepseek-chat",
             "messages": [{"role": "user", "content": prompt}]
-            }
+            },
+        timeout=120  # 设置超时时间为120秒，避免长时间等待，默认的时长时30秒
     )    
 
     response.raise_for_status()
