@@ -22,7 +22,6 @@ def generate_report(
 
     tmpl = Template(REPORT_TEMPLATE)
     html_content = tmpl.render(
-        stock_name=stock_name,
         report_date=date.today().isoformat(),
         **data,
     )

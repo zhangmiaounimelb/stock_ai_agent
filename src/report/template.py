@@ -4,7 +4,7 @@ REPORT_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>{{ stock_name }} 分析报告</title>
+<title>{{ basic_info.company_name }} 分析报告</title>
 <style>
   body { font-family: "Microsoft YaHei", Arial, sans-serif; margin: 40px; background: #f5f5f5; }
   .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; }
@@ -19,7 +19,7 @@ REPORT_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
 <div class="container">
-  <h1>{{ company_name }}（{{ ts_code }}）分析报告</h1>
+  <h1>{{ basic_info.company_name }}（{{ basic_info.ts_code }}）分析报告</h1>
   <p class="meta">生成日期：{{ report_date }}</p>
 
   <div class="section">
