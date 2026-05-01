@@ -1,33 +1,35 @@
-﻿from datetime import date # 无需安装，Python内置模块
-from pathlib import Path # 无需安装，Python内置模块
+﻿import json
+from datetime import date
+from pathlib import Path
 
-from jinja2 import Template # 需要安装，添加到pyproject.toml文件里
+from jinja2 import Template
 
 from .template import REPORT_TEMPLATE
+from ..agent.prompts import COMPANY_ANALYSIS_PROMPT
+from ..tools.llm import call_llm
 
 def generate_report(
-    ts_code: str,
     stock_name: str,
-    company_intro: str = None,
-    financial_rows: list = None,
     output_dir: str = "output",
 ) -> str:
-    
-    """生成股票分析报告 HTML 文件，返回文件路径"""
+    """调用 LLM 生成分析内容，渲染 HTML 报告，返回文件路径"""
 
-    tmpl = Template(REPORT_TEMPLATE)     # 用自定义的模板，生成一个模板对象
-    html_content = tmpl.render(          # 调用render方法，传入数据 生成HTML内容   
-        ts_code=ts_code,
+    prompt = COMPANY_ANALYSIS_PROMPT.format(
+        stock_name=stock_name,
+    )
+    raw = call_llm(prompt)
+    data = json.loads(raw)
+
+    tmpl = Template(REPORT_TEMPLATE)
+    html_content = tmpl.render(
         stock_name=stock_name,
         report_date=date.today().isoformat(),
-        company_intro=company_intro or "（待填充）",
-        financial_rows=financial_rows or [],
+        **data,
     )
 
-
-    out_path = Path(output_dir)         # 用输出路径创建一个Path对象，确保目录存在
-    out_path.mkdir(parents=True, exist_ok=True)   # 创建目录（如果不存在）
-    file_path = out_path / f"{date.today().isoformat()}_{stock_name}.html" # 构建文件路径，格式为：日期_股票名称.html
-    file_path.write_text(html_content, encoding="utf-8")  # 将生成的HTML内容写入文件，使用UTF-8编码
+    out_path = Path(output_dir)
+    out_path.mkdir(parents=True, exist_ok=True)
+    file_path = out_path / f"{date.today().isoformat()}_{stock_name}.html"
+    file_path.write_text(html_content, encoding="utf-8")
 
     return str(file_path)
